@@ -92,43 +92,45 @@
     </div>
 
     <script>
-        function submitFeedback() {
-            // Get form data
-            var formData = {
-                name: document.getElementById("name").value,
-                mobile: document.getElementById("mobile").value,
-                teachingMethod: document.getElementById("teachingMethod").value,
-                aboutTeacher: document.getElementById("aboutTeacher").value,
-                changesNeeded: document.getElementById("changesNeeded").value,
-                marks: document.getElementById("marks").value
-            };
+    function submitFeedback() {
+        // Get form data
+        var formData = {
+            name: document.getElementById("name").value,
+            mobile: document.getElementById("mobile").value,
+            teachingMethod: document.getElementById("teachingMethod").value,
+            aboutTeacher: document.getElementById("aboutTeacher").value,
+            changesNeeded: document.getElementById("changesNeeded").value,
+            marks: document.getElementById("marks").value
+        };
 
-            // Construct URL with form data
-            var url = 'https://script.google.com/macros/s/AKfycbyNWeNerv6K_jczLos-UE_pQkO9PCEBZ6h9YFU8schL-PdKIlCCTHDKpp2vpD6HYEv0/exec';
-            url += '?name=' + encodeURIComponent(formData.name);
-            url += '&mobile=' + encodeURIComponent(formData.mobile);
-            url += '&teachingMethod=' + encodeURIComponent(formData.teachingMethod);
-            url += '&aboutTeacher=' + encodeURIComponent(formData.aboutTeacher);
-            url += '&changesNeeded=' + encodeURIComponent(formData.changesNeeded);
-            url += '&marks=' + encodeURIComponent(formData.marks);
+        // Construct URL with form data
+        var url = 'https://script.google.com/macros/s/AKfycbyNWeNerv6K_jczLos-UE_pQkO9PCEBZ6h9YFU8schL-PdKIlCCTHDKpp2vpD6HYEv0/exec';
+        url += '?name=' + encodeURIComponent(formData.name);
+        url += '&mobile=' + encodeURIComponent(formData.mobile);
+        url += '&teachingMethod=' + encodeURIComponent(formData.teachingMethod);
+        url += '&aboutTeacher=' + encodeURIComponent(formData.aboutTeacher);
+        url += '&changesNeeded=' + encodeURIComponent(formData.changesNeeded);
+        url += '&marks=' + encodeURIComponent(formData.marks);
 
-            // Send form data to Google Apps Script
-            fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                alert('Hi, Your Feedback submitted successfully!, Thankyou for your valuable feedback.');
-                // You can redirect the user or perform any other action here
-            })
-            .catch(error => {
-                console.error('There was a problem with your fetch operation:', error);
-                alert('There was an error submitting your feedback. Please try again later.');
-            });
-        }
-    </script>
+        // Send form data to Google Apps Script
+        fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert('Hi, Your Feedback submitted successfully!, Thank you for your valuable feedback.');
+            // Reset the form
+            document.getElementById("feedbackForm").reset();
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+            alert('There was an error submitting your feedback. Please try again later.');
+        });
+    }
+</script>
+
 </body>
 </html>
