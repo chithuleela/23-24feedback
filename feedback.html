@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Feedback Form</title>
+    <style>
+        /* Basic styling for the form */
+        body {
+            font-family: Arial, sans-serif;
+            background: #b4e68c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea, input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        textarea {
+            height: 100px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: rgb(194, 245, 10);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            color: rgb(235, 40, 5);
+            margin-bottom: 20px;
+        }
+        p{
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Feedback Form</h2>
+        <img src="https://media.licdn.com/dms/image/D5603AQFjNPzUhmAvEQ/profile-displayphoto-shrink_200_200/0/1710601137782?e=1715817600&v=beta&t=waShGwvb-Fq6yefrfDBYzXhlVwI60_9smKfN3joA-u4" alt="" srcset="">
+        <h2>Er. CHIDAMBARAM V <br> Lecturer/Mechanical Engineering</h2> <hr>
+        <p>Hello Everyone, <br><br>"Please provide honest feedback about me. Open your mind and share your thoughts truthfully. Avoid responding with simple yes or no answers. Write 2 to 3 lines expressing your thoughts based on the provided questions. Your input will aid in my self-improvement, so please don't hesitate to be candid."</p>
+        <form id="feedbackForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="mobile">Your Mobile Number: (Whatsapp Number is best)</label>
+            <input type="number" id="mobile" name="mobile" required>
+
+            <label for="teachingMethod">Tell me about my Teaching Method:</label>
+            <textarea id="teachingMethod" name="teachingMethod" required></textarea>
+
+            <label for="aboutTeacher">Tell me About Myself:</label>
+            <textarea id="aboutTeacher" name="aboutTeacher" required></textarea>
+
+            <label for="changesNeeded">If any Changes Needed:</label>
+            <textarea id="changesNeeded" name="changesNeeded" required></textarea>
+
+            <label for="marks">Marks out of 100:(--/100)</label>
+            <input type="number" id="marks" name="marks" min="0" max="100" required>
+
+            <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+        </form>
+    </div>
+
+    <script>
+        function submitFeedback() {
+            // Get form data
+            var formData = {
+                name: document.getElementById("name").value,
+                mobile: document.getElementById("mobile").value,
+                teachingMethod: document.getElementById("teachingMethod").value,
+                aboutTeacher: document.getElementById("aboutTeacher").value,
+                changesNeeded: document.getElementById("changesNeeded").value,
+                marks: document.getElementById("marks").value
+            };
+
+            // Construct URL with form data
+            var url = 'https://script.google.com/macros/s/AKfycbyNWeNerv6K_jczLos-UE_pQkO9PCEBZ6h9YFU8schL-PdKIlCCTHDKpp2vpD6HYEv0/exec';
+            url += '?name=' + encodeURIComponent(formData.name);
+            url += '&mobile=' + encodeURIComponent(formData.mobile);
+            url += '&teachingMethod=' + encodeURIComponent(formData.teachingMethod);
+            url += '&aboutTeacher=' + encodeURIComponent(formData.aboutTeacher);
+            url += '&changesNeeded=' + encodeURIComponent(formData.changesNeeded);
+            url += '&marks=' + encodeURIComponent(formData.marks);
+
+            // Send form data to Google Apps Script
+            fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                alert('Feedback submitted successfully!');
+                // You can redirect the user or perform any other action here
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+                alert('There was an error submitting your feedback. Please try again later.');
+            });
+        }
+    </script>
+</body>
+</html>
